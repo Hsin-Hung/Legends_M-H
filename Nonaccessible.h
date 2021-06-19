@@ -1,14 +1,12 @@
-#ifndef _MARKET_H_
-#define _MARKET_H_
-
+#ifndef _NON_ACCESS_H_
+#define _NON_ACCESS_H_
 #include "Space.h"
 
-class Market : public Space
+class Nonaccessible : public Space
 {
 
 public:
-    Market();
-    virtual ~Market() = default;
+    Nonaccessible();
     virtual void triggerEvent() override;
     void display(std::ostream &os) const override;
 };
