@@ -7,7 +7,7 @@
 
 int main()
 {
-   
-
+    World world(8);
+    world.initWorld();
     return 0;
 }

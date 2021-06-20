@@ -6,13 +6,28 @@
 #include "Attributes.h"
 #include <vector>
 #include <memory>
+//Name/cost/required level/attribute increase/attribute affected
+struct ItemTemplate
+{
+
+    ItemType type;
+    std::string name;
+    int cost;
+    int required_lvl;
+    int damage;
+    int damage_reduced;
+    int attr_inc;
+    Attribute attr_aff;
+    ItemTemplate(ItemType type, std::string name, int cost, int required_lvl, int damage, int damage_reduced, int attr_inc, Attribute attr_aff);
+};
 
 class Market : public Space
 {
 private:
     static std::vector<std::pair<ItemType, std::string>> file_paths;
-    std::vector<std::shared_ptr<Item>> items;
-    int enterMarket(std::unique_ptr<Hero> &hero);
+    std::vector<std::unique_ptr<Item>> items;
+    std::vector<ItemTemplate> item_templates;
+    void enterMarket(std::unique_ptr<Hero> &hero);
 
 public:
     Market();

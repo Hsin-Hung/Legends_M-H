@@ -6,6 +6,11 @@
 #include <fstream>
 #include <sstream>
 
+ItemTemplate::ItemTemplate(ItemType type, std::string name, int cost, int required_lvl, int damage, int damage_reduced, int attr_inc, Attribute attr_aff)
+    : type{type}, name{name}, cost{cost}, required_lvl{required_lvl}, damage{damage}, damage_reduced{damage_reduced}, attr_inc{attr_inc}, attr_aff{attr_aff}
+{
+}
+
 std::vector<std::pair<ItemType, std::string>> Market::file_paths{
     std::make_pair(Armor_T, "./data/Armory.txt"),
     std::make_pair(Weapon_T, "./data/Weaponry.txt"),
@@ -36,38 +41,47 @@ Market::Market() : Space(true, Market_T)
             if (path.first == Potion_T)
             {
                 ss >> name >> cost >> required_lvl >> attr_inc >> attr_aff;
-                items.emplace_back(std::make_shared<Potion>(name, cost, required_lvl, attr_inc, static_cast<Attribute>(attr_aff)));
+                items.emplace_back(std::make_unique<Potion>(name, cost, required_lvl, attr_inc, static_cast<Attribute>(attr_aff)));
             }
             else if (path.first == Armor_T)
             {
                 ss >> name >> cost >> required_lvl >> damage_reduction;
-                items.emplace_back(std::make_shared<Armor>(name, cost, required_lvl, damage_reduction));
+                items.emplace_back(std::make_unique<Armor>(name, cost, required_lvl, damage_reduction));
             }
             else if (path.first == Weapon_T)
             {
                 ss >> name >> cost >> required_lvl >> damage;
-                items.emplace_back(std::make_shared<Weapon>(name, cost, required_lvl, damage));
+                items.emplace_back(std::make_unique<Weapon>(name, cost, required_lvl, damage));
             }
+            else
+            {
+                std::cerr << "No such Item type ..." << std::endl;
+                exit(1);
+            }
+            item_templates.emplace_back(path.first, name, cost, required_lvl, damage, damage_reduction, attr_inc, static_cast<Attribute>(attr_aff));
             ss.clear();
         }
         in_file.close();
     }
 }
 
-int Market::enterMarket(std::unique_ptr<Hero> &hero)
+void Market::enterMarket(std::unique_ptr<Hero> &hero)
 {
     int choice{-1};
 
     while (1)
     {
-        std::cout << "Buy 1.Armory  2.Weaponry  3.Potion (enter number) 4.Exit: ";
+
         do
         {
+            std::cout << "Buy 1.Armory  2.Weaponry  3.Potion (enter number) 4.Exit: ";
             std::cin >> choice;
-        } while (std::cin.fail() || choice < 1 || choice > 3);
+            std::cin.clear();
+            std::cin.ignore();
+        } while (std::cin.fail() || choice < 1 || choice > 4);
 
         if (choice == 4)
-            return -1;
+            return;
 
         ItemType choiceType{static_cast<ItemType>(choice)};
         if (choiceType == Armor_T)
@@ -91,9 +105,24 @@ int Market::enterMarket(std::unique_ptr<Hero> &hero)
                 std::cout << *items[i];
             }
         }
-    }
+        int itemChoice{};
+        std::cout << "Buy an item (enter ID): ";
+        std::cin >> itemChoice; //TODO - need error checking
 
-    return choice;
+        ItemTemplate &tem{item_templates[itemChoice]};
+        if (choiceType == Armor_T)
+        {
+            hero->buyItem(std::make_unique<Armor>(tem.name, tem.cost, tem.required_lvl, tem.damage_reduced));
+        }
+        else if (choiceType == Weapon_T)
+        {
+            hero->buyItem(std::make_unique<Weapon>(tem.name, tem.cost, tem.required_lvl, tem.damage));
+        }
+        else if (choiceType == Potion_T)
+        {
+            hero->buyItem(std::make_unique<Potion>(tem.name, tem.cost, tem.required_lvl, tem.attr_inc, tem.attr_aff));
+        }
+    }
 }
 
 void Market::triggerEvent(std::unique_ptr<Hero> &hero)
@@ -101,7 +130,7 @@ void Market::triggerEvent(std::unique_ptr<Hero> &hero)
     std::cout << "      WELCOME TO THE MARKET\n"
               << std::endl;
 
-    int choice = enterMarket(hero);
+    enterMarket(hero);
 }
 
 void Market::display(std::ostream &os) const

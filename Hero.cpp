@@ -3,12 +3,12 @@
 Hero::Hero(std::string name, int mana, int strength, int agility, int dexterity, int money, int exp)
     : Character(name), mana{mana}, strength{strength}, agility{agility}, dexterity{dexterity}, money{money}, exp{exp} {}
 
-bool Hero::buyItem(std::shared_ptr<Item> &item)
+bool Hero::buyItem(std::unique_ptr<Item> item)
 {
     if (item->getCost() <= money && item->getRequiredLvl() <= level)
     {
-        money-=item->getCost();
-        
+        // money -= item->getCost();
+        std::cout << "BUYING " << item->getName() << std::endl;
         return true;
     }
 
