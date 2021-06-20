@@ -2,16 +2,30 @@
 #ifndef _ITEM_H_
 #define _ITEM_H_
 #include <string>
+#include "Displayable.h"
 
-class Item
+enum ItemType
+{
+    Armor_T = 1,
+    Weapon_T = 2,
+    Potion_T = 3,
+
+};
+
+class Item : public Displayable
 {
 
-private:
+protected:
+    ItemType type;
     std::string name;
     int cost;
     int required_lvl;
 
 public:
-    Item(std::string name, int cost, int required_lvl);
+    virtual void display(std::ostream &os) const = 0;
+    Item(ItemType type, std::string name, int cost, int required_lvl);
+    virtual ~Item() = default;
+    ItemType getType();
+    std::string getName();
 };
 #endif

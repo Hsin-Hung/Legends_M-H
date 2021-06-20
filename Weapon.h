@@ -7,10 +7,12 @@ class Weapon : public Item
 {
 private:
     int damage;
-    int required_hand;
 
 public:
-    Weapon();
+    static void displayHeader();
+    virtual void display(std::ostream &os) const override;
+    Weapon(std::string name, int cost, int required_lvl, int damage);
+    virtual ~Weapon() = default;
 };
 
 #endif

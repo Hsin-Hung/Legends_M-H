@@ -8,7 +8,7 @@ class Common : public Space
 
 public:
     Common();
-    virtual void triggerEvent() override;
+    virtual void triggerEvent(std::unique_ptr<Hero> &hero) override;
     void display(std::ostream &os) const override;
     virtual ~Common() = default;
 };

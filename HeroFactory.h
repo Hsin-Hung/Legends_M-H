@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <string>
+#include <memory>
+#include "Hero.h"
 
 enum HeroType
 {
@@ -33,10 +35,12 @@ private:
     static std::vector<std::pair<HeroType, std::string>> file_paths;
     std::vector<HeroTemplate> hero_templates;
     HeroFactory();
+    void displayHeros();
 
 public:
     static HeroFactory *getInstance();
     ~HeroFactory() = default;
+    std::unique_ptr<Hero> pickHero();
 };
 
 #endif
