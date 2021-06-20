@@ -1,0 +1,15 @@
+#ifndef _SORCERER_H_
+#define _SORCERER_H_
+
+#include "Hero.h"
+
+class Sorcerer : public Hero
+{
+
+public:
+    Sorcerer(std::string name, int mana, int strength, int agility, int dexterity, int money, int exp);
+    virtual void display(std::ostream &os) const override;
+    virtual ~Sorcerer() = default;
+};
+
+#endif
