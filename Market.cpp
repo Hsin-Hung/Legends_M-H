@@ -52,42 +52,44 @@ Market::Market() : Space(true, Market_T)
         }
         in_file.close();
     }
-
-    enterMarket();
 }
 
-int Market::enterMarket()
+int Market::enterMarket(std::unique_ptr<Hero> &hero)
 {
     int choice{-1};
-    std::cout << "Buy 1.Armory  2.Weaponry  3.Potion (enter number) 4.Exit: ";
-    do
-    {
-        std::cin >> choice;
-    } while (std::cin.fail() || choice < 1 || choice > 3);
 
-    if (choice == 4)
-        return -1;
-
-    ItemType choiceType{static_cast<ItemType>(choice)};
-    if (choiceType == Armor_T)
+    while (1)
     {
-        Armor::displayHeader();
-    }
-    else if (choiceType == Weapon_T)
-    {
-        Weapon::displayHeader();
-    }
-    else if (choiceType == Potion_T)
-    {
-        Potion::displayHeader();
-    }
-
-    for (int i = 0; i < items.size(); i++)
-    {
-        if (items[i]->getType() == choiceType)
+        std::cout << "Buy 1.Armory  2.Weaponry  3.Potion (enter number) 4.Exit: ";
+        do
         {
-            std::cout << std::setw(5) << std::left << i;
-            std::cout << *items[i];
+            std::cin >> choice;
+        } while (std::cin.fail() || choice < 1 || choice > 3);
+
+        if (choice == 4)
+            return -1;
+
+        ItemType choiceType{static_cast<ItemType>(choice)};
+        if (choiceType == Armor_T)
+        {
+            Armor::displayHeader();
+        }
+        else if (choiceType == Weapon_T)
+        {
+            Weapon::displayHeader();
+        }
+        else if (choiceType == Potion_T)
+        {
+            Potion::displayHeader();
+        }
+
+        for (int i = 0; i < items.size(); i++)
+        {
+            if (items[i]->getType() == choiceType)
+            {
+                std::cout << std::setw(5) << std::left << i;
+                std::cout << *items[i];
+            }
         }
     }
 
@@ -99,7 +101,7 @@ void Market::triggerEvent(std::unique_ptr<Hero> &hero)
     std::cout << "      WELCOME TO THE MARKET\n"
               << std::endl;
 
-    int choice = enterMarket();
+    int choice = enterMarket(hero);
 }
 
 void Market::display(std::ostream &os) const

@@ -27,5 +27,7 @@ public:
     virtual ~Item() = default;
     ItemType getType();
     std::string getName();
+    int getRequiredLvl();
+    int getCost();
 };
 #endif

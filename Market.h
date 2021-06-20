@@ -12,7 +12,7 @@ class Market : public Space
 private:
     static std::vector<std::pair<ItemType, std::string>> file_paths;
     std::vector<std::shared_ptr<Item>> items;
-    int enterMarket();
+    int enterMarket(std::unique_ptr<Hero> &hero);
 
 public:
     Market();
