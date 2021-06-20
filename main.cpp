@@ -1,11 +1,13 @@
 #include "World.h"
+#include "MonsterFactory.h"
 #include <iostream>
 #include <iomanip>
 
-int main(){
+int main()
+{
 
-    World world(8);
-    world.displayWorld();
-
+    MonsterFactory *mf = MonsterFactory::getInstance();
+    std::unique_ptr<Monster> m = mf->randomMonster(1);
+    std::cout << *m << std::endl;
     return 0;
 }

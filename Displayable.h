@@ -10,6 +10,7 @@ private:
 
 public:
     virtual void display(std::ostream &os) const = 0;
+    
 };
 
 #endif

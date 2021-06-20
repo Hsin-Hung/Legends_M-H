@@ -54,6 +54,7 @@ void World::displayControl()
     std::cout << "D/d: move right\n";
     std::cout << "Q/q: quit game\n";
     std::cout << "I/i: show information\n";
+    std::cout << "Enter a move: ";
 }
 
 void World::generateWorld()
