@@ -1,6 +1,6 @@
 Name/level/damage/defense/dodge chance
 Andrealphus     2       300       100     20
-Aim-Haborym     1       150       350     15
+Aim-Haborym     1       130       350     15
 Andromalius     3       550       450     25
 Chiang-shih     4       700       600     30
 FallenAngel     5       800       700     20
