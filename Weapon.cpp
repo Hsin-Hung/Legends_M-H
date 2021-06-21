@@ -1,6 +1,6 @@
 #include "Weapon.h"
 #include <iomanip>
-
+#include "Hero.h"
 Weapon::Weapon(std::string name, int cost, int required_lvl, int damage)
     : Item(Weapon_T, name, cost, required_lvl), damage{damage}
 {
@@ -22,4 +22,9 @@ void Weapon::displayHeader()
     std::cout << std::setw(15) << std::left << "Required_lvl";
     std::cout << std::setw(15) << std::left << "Damage" << std::endl;
     std::cout << std::string(100, '_') << std::endl;
+}
+
+void Weapon::updateHero(Hero &hero) const
+{
+    hero.increaseDamage(damage);
 }

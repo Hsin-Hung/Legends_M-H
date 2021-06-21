@@ -7,3 +7,11 @@ void Sorcerer::display(std::ostream &os) const
 {
     os << name;
 }
+
+void Sorcerer::subStatsUp(double percentage)
+{
+
+    strength *= (1.0 + percentage);
+    agility *= (1.05 + percentage);
+    dexterity *= (1.05 + percentage);
+}

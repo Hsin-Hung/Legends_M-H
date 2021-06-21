@@ -10,6 +10,7 @@ public:
     Sorcerer(std::string name, int mana, int strength, int agility, int dexterity, int money, int exp);
     virtual void display(std::ostream &os) const override;
     virtual ~Sorcerer() = default;
+    virtual void subStatsUp(double percentage);
 };
 
 #endif

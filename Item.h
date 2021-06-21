@@ -4,6 +4,8 @@
 #include <string>
 #include "Displayable.h"
 
+class Hero;
+
 enum ItemType
 {
     Armor_T = 1,
@@ -29,5 +31,6 @@ public:
     std::string getName();
     int getRequiredLvl();
     int getCost();
+    virtual void updateHero(Hero &hero) const = 0;
 };
 #endif

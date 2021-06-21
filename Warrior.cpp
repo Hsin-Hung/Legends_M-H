@@ -7,3 +7,11 @@ void Warrior::display(std::ostream &os) const
 {
     os << name;
 }
+
+void Warrior::subStatsUp(double percentage)
+{
+
+    strength *= (1.05 + percentage);
+    agility *= (1.05 + percentage);
+    dexterity *= (1.0 + percentage);
+}

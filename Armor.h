@@ -2,6 +2,7 @@
 #define _ARMOR_H_
 
 #include "Item.h"
+
 class Armor : public Item
 {
 private:
@@ -12,6 +13,7 @@ public:
     virtual void display(std::ostream &os) const override;
     Armor(std::string name, int cost, int required_lvl, int damage_reduction);
     virtual ~Armor() = default;
+    virtual void updateHero(Hero &hero) const override;
 };
 
 #endif

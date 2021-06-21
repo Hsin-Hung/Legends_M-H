@@ -74,7 +74,7 @@ void Market::enterMarket(std::unique_ptr<Hero> &hero)
 
         do
         {
-            std::cout << "Buy 1.Armory  2.Weaponry  3.Potion (enter number) 4.Exit: ";
+            std::cout << "1.Armory 2.Weaponry 3.Potion 4.Exit (enter number): ";
             std::cin >> choice;
             std::cin.clear();
             std::cin.ignore();
@@ -127,7 +127,7 @@ void Market::enterMarket(std::unique_ptr<Hero> &hero)
 
 void Market::triggerEvent(std::unique_ptr<Hero> &hero)
 {
-    std::cout << "      WELCOME TO THE MARKET\n"
+    std::cout << "      WELCOME TO THE MARKET\n\n"
               << std::endl;
 
     enterMarket(hero);

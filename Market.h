@@ -6,7 +6,7 @@
 #include "Attributes.h"
 #include <vector>
 #include <memory>
-//Name/cost/required level/attribute increase/attribute affected
+
 struct ItemTemplate
 {
 

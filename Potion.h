@@ -4,6 +4,7 @@
 #include "Item.h"
 #include "Attributes.h"
 
+
 class Potion : public Item
 {
 private:
@@ -16,6 +17,7 @@ public:
     virtual void display(std::ostream &os) const override;
     Potion(std::string name, int cost, int required_lvl, int attr_inc, Attribute attr_aff);
     virtual ~Potion() = default;
+    virtual void updateHero(Hero &hero) const override;
 };
 
 #endif

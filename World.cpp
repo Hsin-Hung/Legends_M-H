@@ -145,8 +145,8 @@ void World::doMove(char move)
         y = hero_coord.second + 1;
         break;
     case 'I':
-        std::cout << "Show hero info" << std::endl;
-        return;
+        hero->displayInfo();
+        break;
     default:
         std::cout << "Invalid move! Enter Again!" << std::endl;
     }

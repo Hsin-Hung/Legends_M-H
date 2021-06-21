@@ -1,7 +1,7 @@
 #include "Armor.h"
 #include <iostream>
 #include <iomanip>
-
+#include "Hero.h"
 Armor::Armor(std::string name, int cost, int required_lvl, int damage_reduction)
     : Item(Armor_T, name, cost, required_lvl), damage_reduction{damage_reduction}
 {
@@ -23,4 +23,9 @@ void Armor::display(std::ostream &os) const
     os << std::setw(15) << std::left << cost;
     os << std::setw(15) << std::left << required_lvl;
     os << std::setw(15) << std::left << damage_reduction << std::endl;
+}
+
+void Armor::updateHero(Hero &hero) const
+{
+    hero.increaseDamageReduction(damage_reduction);
 }

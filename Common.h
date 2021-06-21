@@ -5,7 +5,8 @@
 
 class Common : public Space
 {
-
+private:
+    static double monsterEncounterChance;
 public:
     Common();
     virtual void triggerEvent(std::unique_ptr<Hero> &hero) override;

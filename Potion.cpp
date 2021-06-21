@@ -1,4 +1,5 @@
 #include "Potion.h"
+#include "Hero.h"
 #include <iomanip>
 
 void Potion::display(std::ostream &os) const
@@ -49,4 +50,32 @@ void Potion::displayHeader()
     std::cout << std::setw(25) << std::left << "Attribute_increase";
     std::cout << std::setw(25) << std::left << "Attribute_affected" << std::endl;
     std::cout << std::string(150, '_') << std::endl;
+}
+
+void Potion::updateHero(Hero &hero) const
+{
+    switch (attr_aff)
+    {
+
+    case health:
+        hero.increaseHealth(attr_inc);
+        break;
+    case strength:
+        hero.increaseStrength(attr_inc);
+        break;
+    case mana:
+        hero.increaseMana(attr_inc);
+        break;
+    case agility:
+        hero.increaseAgility(attr_inc);
+        break;
+    case dexterity:
+        hero.increaseDexterity(attr_inc);
+        break;
+    case defense:
+        hero.increaseDamageReduction(attr_inc);
+        break;
+    default:
+        std::cerr << "No such attribute ..." << std::endl;
+    }
 }
